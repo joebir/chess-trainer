@@ -1,3 +1,78 @@
+class Board {
+    constructor() {
+        this.board = [{
+                a: " ",
+                b: " ",
+                c: " ",
+                d: " ",
+                e: " ",
+                f: " ",
+                g: " ",
+                h: " "
+            },
+            {
+                a: " ",
+                b: " ",
+                c: " ",
+                d: " ",
+                e: " ",
+                f: " ",
+                g: " ",
+                h: " "
+            },
+            {
+                a: "\u2659",
+                b: "\u2659",
+                c: "\u2659",
+                d: "\u2659",
+                e: "\u2659",
+                f: "\u2659",
+                g: "\u2659",
+                h: "\u2659"
+            },
+            {
+                a: "\u2656",
+                b: "\u2658",
+                c: "\u2657",
+                d: "\u2655",
+                e: "\u2654",
+                f: "\u2657",
+                g: "\u2658",
+                h: "\u2656"
+            }
+        ];
+        this.space = (divIndex, newValue = null) => {
+            const rankIndex = Math.floor(divIndex / 8);
+            const fileArrIndex = divIndex % 8;
+            const fileArr = ["a", "b", "c", "d", "e", "f", "g", "h"];
+            const fileIndex = fileArr[fileArrIndex]
+            if (newValue)
+                this.board[rankIndex][fileIndex] = newValue
+            else
+                return this.board[rankIndex][fileIndex];
+        };
+        this.move = (positions) => {
+            const contents = this.space(positions[0]);
+            this.space(positions[0], " ");
+            this.space(positions[1], contents);
+            this.displayBoard();
+        };
+        this.displayBoard = () => {
+            $(".space").children().remove();
+            for (let rankIndex = 0; rankIndex < 4; rankIndex++) {
+                for (let fileIndex = 0; fileIndex < 8; fileIndex++) {
+                    const divIndex = (rankIndex * 8) + fileIndex;
+                    const $contentsP = $("<p>").text(this.space(divIndex));
+                    const $targetDiv = $($("#board-container").children().get(divIndex));
+                    $targetDiv.append($contentsP);
+                }
+            }
+        };
+    }
+}
+
+let boardMemory = new Board;
+
 const generateBoard = () => {
     let spaceIsWhite = true;
     for (let i = 1; i <= 32; i++) {
@@ -9,32 +84,9 @@ const generateBoard = () => {
             $spaceDiv.addClass("black-space");
             (i % 8 == 0) ? spaceIsWhite = false: spaceIsWhite = true;
         }
-        $spaceDiv.on("click", (event) => {
-            const $currentTarget = $(event.currentTarget);
-            highlightSpace($currentTarget);
-            console.log(getSpaceNotation($currentTarget));
-        })
-        if (i >= 17)
-            addPiece(i, $spaceDiv);
         $("#board-container").append($spaceDiv);
     }
-}
-
-const addPiece = (index, $spaceDiv) => {
-    const $spaceP = $("<p>");
-    if (index < 25)
-        $spaceP.text("\u2659");
-    else if (index == 25 || index == 32)
-        $spaceP.text("\u2656");
-    else if (index == 26 || index == 31)
-        $spaceP.text("\u2658");
-    else if (index == 27 || index == 30)
-        $spaceP.text("\u2657");
-    else if (index == 28)
-        $spaceP.text("\u2655");
-    else
-        $spaceP.text("\u2654");
-    $spaceDiv.append($spaceP);
+    boardMemory.displayBoard();
 }
 
 const highlightSpace = ($spaceDiv) => {
@@ -46,51 +98,58 @@ const highlightSpace = ($spaceDiv) => {
         const $currentTarget = $(event.currentTarget);
         $currentTarget.removeClass("highlight-space");
         $currentTarget.addClass(spaceColorClass);
-        $currentTarget.on("click", (event) => {
-            const $futureTarget = $(event.currentTarget);
-            highlightSpace($futureTarget);
-        })
     })
 }
 
-const getSpaceNotation = ($currentTarget) => {
-    const currentPiece = getSpaceContents($currentTarget);
-    const spaceIndexFrom1 = $("#board-container").children().index($currentTarget) + 1;
-    const fileIndexAsNum = spaceIndexFrom1 % 8;
-    const rankIndex = Math.ceil(spaceIndexFrom1 / 8);
-    const convertedRankIndex = Math.abs(rankIndex - 5); // converts rank index to start at bottom instead of top
-    switch (fileIndexAsNum) {
-        case 1:
-            return `${currentPiece}a${convertedRankIndex}`;
-        case 2:
-            return `${currentPiece}b${convertedRankIndex}`;
-        case 3:
-            return `${currentPiece}c${convertedRankIndex}`;
-        case 4:
-            return `${currentPiece}d${convertedRankIndex}`;
-        case 5:
-            return `${currentPiece}e${convertedRankIndex}`;
-        case 6:
-            return `${currentPiece}f${convertedRankIndex}`;
-        case 7:
-            return `${currentPiece}g${convertedRankIndex}`;
-        case 0:
-            return `${currentPiece}h${convertedRankIndex}`;
-        default:
-            throw "Error getting space notation";
-    }
+
+const highlightToSelect = (movesArr) => {
+    const $startDiv = $($("#board-container").children().get(movesArr[0][0]));
+    const $endDiv = $($("#board-container").children().get(movesArr[0][1]));
+    highlightSpace($startDiv);
+    $startDiv.on("click", () => {
+        highlightToMove($endDiv, movesArr);
+    });
 }
 
-const getSpaceContents = ($currentTarget) => {
-    return $currentTarget.children().first().text();
+const highlightToMove = ($endDiv, movesArr) => {
+    highlightSpace($endDiv);
+    $endDiv.on("click", () => {
+        boardMemory.move(movesArr[0]);
+        movesArr.shift();
+        if (movesArr.length)
+            highlightToSelect(movesArr);
+    })
+}
+
+const arrangeOpening = (notationMovesArr) => {
+    const movesArr = [];
+    notationMovesArr.forEach(moveNotation => {
+        const spaces = moveNotation.split(" ");
+        const divIndices = [];
+        spaces.forEach(spaceNotation => {
+            const splitNotation = spaceNotation.split("");
+            const rankIndex = Math.abs(parseInt(splitNotation[1]) - 4)
+            const fileArr = ["a", "b", "c", "d", "e", "f", "g", "h"];
+            const fileIndex = fileArr.indexOf(splitNotation[0]);
+            divIndices.push(rankIndex * 8 + fileIndex);
+        });
+        movesArr.push(divIndices);
+    });
+    highlightToSelect(movesArr);
 }
 
 const resetBoard = () => {
     $("#board-container").empty();
+    boardMemory = new Board;
     generateBoard();
 }
+
+const lopezMovesArr = ["e2 e4", "c2 c3"];
 
 $(() => {
     generateBoard();
     $("#reset-button").on("click", resetBoard);
+    $("#lopez-button").on("click", () => {
+        arrangeOpening(lopezMovesArr);
+    })
 })
