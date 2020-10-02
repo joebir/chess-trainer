@@ -2,6 +2,54 @@ body {
     background-color: #121212;
 }
 
+#board-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 400px;
+    height: 200px;
+}
+
+.space {
+    width: 12.5%;
+    height: 25%;
+}
+
+.space p {
+    color: #121212;
+}
+
+.white-space {
+    background-color: #f8f8ff;
+}
+
+.black-space {
+    background-color: #8b8589;
+}
+
+.highlight-space {
+    background-image: linear-gradient(45deg,
+            #367588 25%,
+            #0d98ba 25%,
+            #0d98ba 50%,
+            #367588 50%,
+            #367588 75%,
+            #0d98ba 75%,
+            #0d98ba 100%);
+    background-size: 100%;
+}
+
+#reset-button {
+    border: 4px none;
+    border-radius: 4px;
+    background-color: #d40000;
+    color: #f8f8ff;
+    font-family: sans-serif;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+}
+
 /* 
 Black: #121212
 Grey: #8b8589
