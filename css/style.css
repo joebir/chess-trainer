@@ -13,10 +13,14 @@ body {
 .space {
     width: 12.5%;
     height: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .space p {
     color: #121212;
+    font-size: 48px;
 }
 
 .white-space {
@@ -37,6 +41,7 @@ body {
             #0d98ba 75%,
             #0d98ba 100%);
     background-size: 100%;
+    cursor: pointer;
 }
 
 #reset-button {
@@ -49,10 +54,3 @@ body {
     text-align: center;
     cursor: pointer;
 }
-
-/* 
-Black: #121212
-Grey: #8b8589
-White: f8f8ff
-Red: d40000
-*/

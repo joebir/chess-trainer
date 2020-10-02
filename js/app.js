@@ -13,8 +13,27 @@ const generateBoard = () => {
             const $currentTarget = $(event.currentTarget);
             highlightSpace($currentTarget);
         })
+        if(i >= 17)
+            addPiece(i, $spaceDiv);
         $("#board-container").append($spaceDiv);
     }
+}
+
+const addPiece = (index, $spaceDiv) => {
+    const $spaceP = $("<p>");
+    if(index < 25)
+        $spaceP.text("\u2659");
+    else if(index == 25 || index == 32)
+        $spaceP.text("\u2656");
+    else if(index == 26 || index == 31)
+        $spaceP.text("\u2658");
+    else if(index == 27 || index == 30)
+        $spaceP.text("\u2657");
+    else if(index == 28)
+        $spaceP.text("\u2655");
+    else
+        $spaceP.text("\u2654");
+    $spaceDiv.append($spaceP);
 }
 
 const highlightSpace = ($spaceDiv) => {
