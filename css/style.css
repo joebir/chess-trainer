@@ -2,17 +2,22 @@ body {
     background-color: #121212;
 }
 
+#content-wrapper {
+    display: inline-flex;
+    justify-content: space-around;
+}
+
 #board-container {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
     width: 400px;
-    height: 200px;
+    height: 400px;
 }
 
 .space {
     width: 12.5%;
-    height: 25%;
+    height: 12.5%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,13 +49,48 @@ body {
     cursor: pointer;
 }
 
-#reset-button {
+#modal {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    overflow: auto;
+    display: none;
+}
+
+#modal-textbox {
+    background-color: #f8f8ff;
+    border-radius: 2px;
+    margin: 150px auto;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    padding: 2%;
+    line-height: 120%;
+    width: 200px;
+    text-align: center;
+}
+
+#button-container {
+    width: 10vw;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-flow: wrap;
+    padding: 5px;
+}
+
+button {
     border: 4px none;
     border-radius: 4px;
-    background-color: #d40000;
-    color: #f8f8ff;
     font-family: sans-serif;
     font-size: 16px;
     text-align: center;
     cursor: pointer;
+}
+
+#reset-button {
+    background-color: #d40000;
+    color: #f8f8ff;
 }
