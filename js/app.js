@@ -113,36 +113,6 @@ class Board {
 
 let boardMemory = new Board;
 
-const openings = [{
-    name: "Ruy Lopez",
-    moves: ["e2 e4", "e7 e5", "g1 f3", "b8 c6", "f1 b5"],
-    notation: ["e4", "e5", "♘f3", "♞c6", "♗b5"]
-}, {
-    name: "Italian Game",
-    moves: ["e2 e4", "e7 e5", "g1 f3", "b8 c6", "f1 c4"],
-    notation: ["e4", "e5", "♘f3", "♞c6", "♗c4"]
-}, {
-    name: "Scotch Game",
-    moves: ["e2 e4", "e7 e5", "g1 f3", "b8 c6", "d2 d4"],
-    notation: ["e4", "e5", "♘f3", "♞c6", "d4"]
-}, {
-    name: "King's Gambit",
-    moves: ["e2 e4", "e7 e5", "f2 f4"],
-    notation: ["e4", "e5", "f4"]
-}, {
-    name: "Vienna Game",
-    moves: ["e2 e4", "e7 e5", "b1 c3"],
-    notation: ["e4", "e5", "♘c3"]
-}, {
-    name: "Bishop's Opening",
-    moves: ["e2 e4", "e7 e5", "f1 c4"],
-    notation: ["e4", "e5", "♗c4"]
-}, {
-    name: "Danish Gambit",
-    moves: ["e2 e4", "e7 e5", "d2 d4", "e5 d4", "c2 c3"],
-    notation: ["e4", "e5", "d4", "exd4", "c3"]
-}]
-
 const generateBoard = () => {
     let spaceIsWhite = true;
     for (let i = 1; i <= 64; i++) {
@@ -232,30 +202,44 @@ const resetBoard = () => {
 }
 
 $(() => {
-    let nextOpening = [];
-    generateBoard();
-    openings.forEach(opening => {
-        const $openingButton = $("<button>").text(opening.name);
-        $openingButton.addClass("opening-button");
-        $("#button-container").append($openingButton);
-    });
-    $(".opening-button").one("click", (event) => {
-        const $currentTarget = $(event.currentTarget);
-        const opening = openings.find(opening => opening.name ==
-            $currentTarget.text());
-        arrangeOpening(opening);
-        $(".opening-button").off("click");
-        $(".opening-button").on("click", (event) => {
+    let openings = [{
+        name: "",
+        moves: [""],
+        notation: [""]
+    }];
+    $.getJSON("openings.json", (data) => {
+        openings = data;
+        openings.forEach(opening => {
+            const $openingButton = $("<button>").text(opening.name);
+            $openingButton.addClass("opening-button");
+            $("#button-container").append($openingButton);
+        });
+
+        $(".opening-button").one("click", (event) => {
             const $currentTarget = $(event.currentTarget);
-            $("#modal").show();
-            nextOpening = openings.find(opening => opening.name ==
+            const opening = openings.find(opening => opening.name ==
                 $currentTarget.text());
+            arrangeOpening(opening);
+            $(".opening-button").off("click");
+            $(".opening-button").on("click", (event) => {
+                const $currentTarget = $(event.currentTarget);
+                $("#modal").show();
+                nextOpening = openings.find(opening => opening.name ==
+                    $currentTarget.text());
+            })
         })
     })
 
+    let nextOpening = {
+        name: "",
+        moves: [""],
+        notation: [""]
+    };
     $(".close-modal").on("click", () => $("#modal").hide());
     $("#reset-button").on("click", () => {
         resetBoard();
         arrangeOpening(nextOpening);
     })
+
+    generateBoard();
 });

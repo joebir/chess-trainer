@@ -1,0 +1,108 @@
+[{
+        "name": "Ruy Lopez",
+        "moves": [
+            "e2 e4",
+            "e7 e5",
+            "g1 f3",
+            "b8 c6",
+            "f1 b5"
+        ],
+        "notation": [
+            "e4",
+            "e5",
+            "♘f3",
+            "♞c6",
+            "♗b5"
+        ]
+    },
+    {
+        "name": "Italian Game",
+        "moves": [
+            "e2 e4",
+            "e7 e5",
+            "g1 f3",
+            "b8 c6",
+            "f1 c4"
+        ],
+        "notation": [
+            "e4",
+            "e5",
+            "♘f3",
+            "♞c6",
+            "♗c4"
+        ]
+    },
+    {
+        "name": "Scotch Game",
+        "moves": [
+            "e2 e4",
+            "e7 e5",
+            "g1 f3",
+            "b8 c6",
+            "d2 d4"
+        ],
+        "notation": [
+            "e4",
+            "e5",
+            "♘f3",
+            "♞c6",
+            "d4"
+        ]
+    },
+    {
+        "name": "King's Gambit",
+        "moves": [
+            "e2 e4",
+            "e7 e5",
+            "f2 f4"
+        ],
+        "notation": [
+            "e4",
+            "e5",
+            "f4"
+        ]
+    },
+    {
+        "name": "Vienna Game",
+        "moves": [
+            "e2 e4",
+            "e7 e5",
+            "b1 c3"
+        ],
+        "notation": [
+            "e4",
+            "e5",
+            "♘c3"
+        ]
+    },
+    {
+        "name": "Bishop's Opening",
+        "moves": [
+            "e2 e4",
+            "e7 e5",
+            "f1 c4"
+        ],
+        "notation": [
+            "e4",
+            "e5",
+            "♗c4"
+        ]
+    },
+    {
+        "name": "Danish Gambit",
+        "moves": [
+            "e2 e4",
+            "e7 e5",
+            "d2 d4",
+            "e5 d4",
+            "c2 c3"
+        ],
+        "notation": [
+            "e4",
+            "e5",
+            "d4",
+            "exd4",
+            "c3"
+        ]
+    }
+]

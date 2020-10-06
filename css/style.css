@@ -55,16 +55,17 @@ body {
 }
 
 #moves-sidebar {
-    background-color: #8b8589;
+    border: 3px groove #f8f8f8;
     width: 100px;
 }
 
 #moves-sidebar h3 {
+    color: #f8f8ff;
     text-align: center;
 }
 
 #moves-sidebar ol {
-    color: #121212;
+    color: #f8f8f8;
     text-align: left;
     padding-left: 20px;
 }
