@@ -1,34 +1,24 @@
 class Board {
     constructor() {
         this.board = [{
-                a: "\u265C",
-                b: "\u265E",
-                c: "\u265D",
-                d: "\u265B",
-                e: "\u265A",
-                f: "\u265D",
-                g: "\u265E",
-                h: "\u265C"
+                a: "♜",
+                b: "♞",
+                c: "♝",
+                d: "♛",
+                e: "♚",
+                f: "♝",
+                g: "♞",
+                h: "♜"
             },
             {
-                a: "\u265F",
-                b: "\u265F",
-                c: "\u265F",
-                d: "\u265F",
-                e: "\u265F",
-                f: "\u265F",
-                g: "\u265F",
-                h: "\u265F"
-            },
-            {
-                a: " ",
-                b: " ",
-                c: " ",
-                d: " ",
-                e: " ",
-                f: " ",
-                g: " ",
-                h: " "
+                a: "♟",
+                b: "♟",
+                c: "♟",
+                d: "♟",
+                e: "♟",
+                f: "♟",
+                g: "♟",
+                h: "♟"
             },
             {
                 a: " ",
@@ -61,24 +51,34 @@ class Board {
                 h: " "
             },
             {
-                a: "\u2659",
-                b: "\u2659",
-                c: "\u2659",
-                d: "\u2659",
-                e: "\u2659",
-                f: "\u2659",
-                g: "\u2659",
-                h: "\u2659"
+                a: " ",
+                b: " ",
+                c: " ",
+                d: " ",
+                e: " ",
+                f: " ",
+                g: " ",
+                h: " "
             },
             {
-                a: "\u2656",
-                b: "\u2658",
-                c: "\u2657",
-                d: "\u2655",
-                e: "\u2654",
-                f: "\u2657",
-                g: "\u2658",
-                h: "\u2656"
+                a: "♙",
+                b: "♙",
+                c: "♙",
+                d: "♙",
+                e: "♙",
+                f: "♙",
+                g: "♙",
+                h: "♙"
+            },
+            {
+                a: "♖",
+                b: "♘",
+                c: "♗",
+                d: "♕",
+                e: "♔",
+                f: "♗",
+                g: "♘",
+                h: "♖"
             }
         ];
         this.space = (divIndex, newValue = null) => {
@@ -114,32 +114,33 @@ class Board {
 let boardMemory = new Board;
 
 const openings = [{
-    name: "London System",
-    moves: [
-        "d2 d4",
-        "d7 d5",
-        "c1 f4"
-    ]
+    name: "Ruy Lopez",
+    moves: ["e2 e4", "e7 e5", "g1 f3", "b8 c6", "f1 b5"],
+    notation: ["e4", "e5", "♘f3", "♞c6", "♗b5"]
 }, {
-    name: "Veresov Opening",
-    moves: [
-        "d2 d4",
-        "d7 d5",
-        "b1 c3",
-        "g8 f6",
-        "c1 g5"
-    ]
+    name: "Italian Game",
+    moves: ["e2 e4", "e7 e5", "g1 f3", "b8 c6", "f1 c4"],
+    notation: ["e4", "e5", "♘f3", "♞c6", "♗c4"]
 }, {
-    name: "Chekhover Variation",
-    moves: [
-        "e2 e4",
-        "c7 c5",
-        "g1 f3",
-        "d7 d6",
-        "d2 d4",
-        "c5 d4",
-        "d1 d4"
-    ]
+    name: "Scotch Game",
+    moves: ["e2 e4", "e7 e5", "g1 f3", "b8 c6", "d2 d4"],
+    notation: ["e4", "e5", "♘f3", "♞c6", "d4"]
+}, {
+    name: "King's Gambit",
+    moves: ["e2 e4", "e7 e5", "f2 f4"],
+    notation: ["e4", "e5", "f4"]
+}, {
+    name: "Vienna Game",
+    moves: ["e2 e4", "e7 e5", "b1 c3"],
+    notation: ["e4", "e5", "♘c3"]
+}, {
+    name: "Bishop's Opening",
+    moves: ["e2 e4", "e7 e5", "f1 c4"],
+    notation: ["e4", "e5", "♗c4"]
+}, {
+    name: "Danish Gambit",
+    moves: ["e2 e4", "e7 e5", "d2 d4", "e5 d4", "c2 c3"],
+    notation: ["e4", "e5", "d4", "exd4", "c3"]
 }]
 
 const generateBoard = () => {
@@ -171,39 +172,46 @@ const highlightSpace = ($spaceDiv) => {
 }
 
 
-const highlightToSelect = (movesArr) => {
+const highlightToSelect = (movesArr, notationArr) => {
     const $startDiv = $($("#board-container").children().get(movesArr[0][0]));
     const $endDiv = $($("#board-container").children().get(movesArr[0][1]));
     highlightSpace($startDiv);
     $startDiv.one("click", () => {
-        highlightToMove($endDiv, movesArr);
+        highlightToMove($endDiv, movesArr, notationArr);
     });
 }
 
-const highlightToMove = ($endDiv, movesArr) => {
+const highlightToMove = ($endDiv, movesArr, notationArr) => {
     highlightSpace($endDiv);
     $endDiv.one("click", () => {
-        console.log($endDiv);
         boardMemory.move(movesArr[0]);
+        const $notationLi = $("<li>").text(notationArr[0]);
+        $("ol").append($notationLi);
         movesArr.shift();
+        notationArr.shift();
         if (movesArr.length)
-            opponentMove(movesArr);
+            opponentMove(movesArr, notationArr);
     })
 }
 
-const opponentMove = (movesArr) => {
+const opponentMove = (movesArr, notationArr) => {
     boardMemory.move(movesArr[0]);
+    const $notationLi = $($("ol").children().last());
+    let notationText = `${$notationLi.text()} ${notationArr[0]}`;
+    $notationLi.text(notationText);
     movesArr.shift();
-    highlightToSelect(movesArr);
+    notationArr.shift();
+    highlightToSelect(movesArr, notationArr);
 }
 
-const arrangeOpening = (notationMovesArr) => {
+const arrangeOpening = (opening) => {
     const movesArr = [];
-    notationMovesArr.forEach(moveNotation => {
-        const spaces = moveNotation.split(" ");
+    opening.moves.map(move => move).forEach(move => {
+        const spaces = move.split(" ");
         const divIndices = [];
         spaces.forEach(spaceNotation => {
-            const splitNotation = spaceNotation.split("");
+            const noPieceSpaceNotation = spaceNotation.substring(spaceNotation.length - 2);
+            const splitNotation = noPieceSpaceNotation.split("");
             const rankIndex = Math.abs(parseInt(splitNotation[1]) - 8)
             const fileArr = ["a", "b", "c", "d", "e", "f", "g", "h"];
             const fileIndex = fileArr.indexOf(splitNotation[0]);
@@ -211,17 +219,20 @@ const arrangeOpening = (notationMovesArr) => {
         });
         movesArr.push(divIndices);
     });
-    highlightToSelect(movesArr);
+    const notationArr = opening.notation.map(notation => notation);
+    highlightToSelect(movesArr, notationArr);
 }
 
 const resetBoard = () => {
     $("#board-container").empty();
+    $("ol").empty();
+    $(".space").off("click");
     boardMemory = new Board;
     generateBoard();
 }
 
 $(() => {
-    let nextOpeningMovesArr = [];
+    let nextOpening = [];
     generateBoard();
     openings.forEach(opening => {
         const $openingButton = $("<button>").text(opening.name);
@@ -230,21 +241,21 @@ $(() => {
     });
     $(".opening-button").one("click", (event) => {
         const $currentTarget = $(event.currentTarget);
-        const openingMovesArr = openings.find(opening => opening.name ==
-            $currentTarget.text()).moves;
-        arrangeOpening(openingMovesArr);
+        const opening = openings.find(opening => opening.name ==
+            $currentTarget.text());
+        arrangeOpening(opening);
         $(".opening-button").off("click");
         $(".opening-button").on("click", (event) => {
             const $currentTarget = $(event.currentTarget);
             $("#modal").show();
-            nextOpeningMovesArr = openings.find(opening => opening.name ==
-                $currentTarget.text()).moves;
+            nextOpening = openings.find(opening => opening.name ==
+                $currentTarget.text());
         })
     })
 
     $(".close-modal").on("click", () => $("#modal").hide());
     $("#reset-button").on("click", () => {
         resetBoard();
-        arrangeOpening(nextOpeningMovesArr);
+        arrangeOpening(nextOpening);
     })
 });

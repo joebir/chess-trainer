@@ -4,15 +4,20 @@ body {
 
 #content-wrapper {
     display: inline-flex;
-    justify-content: space-around;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    width: 95vw;
+    min-width: 450px;
 }
 
 #board-container {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    width: 400px;
-    height: 400px;
+    min-width: 400px;
+    min-height: 400px;
+    height: 60vmin;
+    width: 60vmin;
 }
 
 .space {
@@ -49,6 +54,21 @@ body {
     cursor: pointer;
 }
 
+#moves-sidebar {
+    background-color: #8b8589;
+    width: 100px;
+}
+
+#moves-sidebar h3 {
+    text-align: center;
+}
+
+#moves-sidebar ol {
+    color: #121212;
+    text-align: left;
+    padding-left: 20px;
+}
+
 #modal {
     background-color: rgba(0, 0, 0, 0.4);
     position: fixed;
@@ -73,21 +93,31 @@ body {
 }
 
 #button-container {
-    width: 10vw;
+    min-width: 100px;
+    max-width: 95vw;
     display: flex;
     align-items: flex-start;
-    justify-content: flex-start;
-    flex-flow: wrap;
-    padding: 5px;
+    justify-content: space-between;
+    flex-flow: row wrap;
 }
 
 button {
     border: 4px none;
     border-radius: 4px;
     font-family: sans-serif;
-    font-size: 16px;
+    font-size: 12px;
     text-align: center;
     cursor: pointer;
+    width: 75px;
+    min-width: 75px;
+    height: 30px;
+    min-height: 30px;
+    margin: 5px;
+}
+
+.close-modal {
+    background-color: #121212;
+    color: #f8f8ff;
 }
 
 #reset-button {
