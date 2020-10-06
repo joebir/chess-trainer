@@ -33,6 +33,45 @@
         ]
     },
     {
+        "name": "Sicilian: Closed",
+        "moves": [
+            "e2 e4",
+            "c7 c5",
+            "b1 c3"
+        ],
+        "notation": [
+            "e4",
+            "c5",
+            "♘c3"
+        ]
+    },
+    {
+        "name": "Sicilian: Alapin",
+        "moves": [
+            "e2 e4",
+            "c7 c5",
+            "c2 c3"
+        ],
+        "notation": [
+            "e4",
+            "c5",
+            "c3"
+        ]
+    },
+    {
+        "name": "King's Gambit",
+        "moves": [
+            "e2 e4",
+            "e7 e5",
+            "f2 f4"
+        ],
+        "notation": [
+            "e4",
+            "e5",
+            "f4"
+        ]
+    },
+    {
         "name": "Scotch Game",
         "moves": [
             "e2 e4",
@@ -50,59 +89,63 @@
         ]
     },
     {
-        "name": "King's Gambit",
+        "name": "Queen's Gambit",
         "moves": [
-            "e2 e4",
-            "e7 e5",
-            "f2 f4"
-        ],
-        "notation": [
-            "e4",
-            "e5",
-            "f4"
-        ]
-    },
-    {
-        "name": "Vienna Game",
-        "moves": [
-            "e2 e4",
-            "e7 e5",
-            "b1 c3"
-        ],
-        "notation": [
-            "e4",
-            "e5",
-            "♘c3"
-        ]
-    },
-    {
-        "name": "Bishop's Opening",
-        "moves": [
-            "e2 e4",
-            "e7 e5",
-            "f1 c4"
-        ],
-        "notation": [
-            "e4",
-            "e5",
-            "♗c4"
-        ]
-    },
-    {
-        "name": "Danish Gambit",
-        "moves": [
-            "e2 e4",
-            "e7 e5",
             "d2 d4",
-            "e5 d4",
-            "c2 c3"
+            "d7 d5",
+            "c2 c4"
         ],
         "notation": [
-            "e4",
-            "e5",
             "d4",
-            "exd4",
-            "c3"
+            "d5",
+            "c4"
+        ]
+    },
+    {
+        "name": "Trompowsky Attack",
+        "moves": [
+            "d2 d4",
+            "g8 f6",
+            "c1 g5"
+        ],
+        "notation": [
+            "d4",
+            "♞f6",
+            "♗g5"
+        ]
+    },
+    {
+        "name": "London System",
+        "moves": [
+            "d2 d4",
+            "d7 d5",
+            "g1 f3",
+            "g8 f6",
+            "c1 f4"
+        ],
+        "notation": [
+            "d4",
+            "d5",
+            "♘f3",
+            "♞f6",
+            "♗f4"
+        ]
+    },
+    {
+        "name": "Catalan Opening",
+        "moves": [
+            "d2 d4",
+            "g8 f6",
+            "c2 c4",
+            "e7 e6",
+            "g2 g3"
+        ],
+        "notation": [
+            "d4",
+            "♞f6",
+            "c4",
+            "e6",
+            "g3"
         ]
     }
 ]
