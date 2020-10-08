@@ -14,17 +14,17 @@ body {
 #board-container {
     display: flex;
     flex-wrap: wrap;
-    width: 88vw;
-    height: 88vw;
-    max-height: 88vmin;
-    max-width: 88vmin;
+    width: 86vw;
+    height: 86vw;
+    max-width: 86vmin;
+    max-height: 86vmin;
 }
 
 .space {
-    width: 11vw;
-    height: 11vw;
-    max-height: 11vmin;
-    max-width: 11vmin;
+    width: 10.75vw;
+    max-width: 10.75vmin;
+    height: 10.75vw;
+    max-height: 10.75vmin;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -188,22 +188,23 @@ button {
         flex-flow: row wrap;
         margin-top: 2px;
         margin-right: 2px;
+        max-width: 250px;
     }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
     #board-container {
         width: 72vw;
+        max-width: 72vmin;
         height: 72vw;
         max-height: 72vmin;
-        max-width: 72vmin;
     }
 
     .space {
         width: 9vw;
+        max-width: 9vmin;
         height: 9vw;
         max-height: 9vmin;
-        max-width: 9vmin;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -221,16 +222,16 @@ button {
 
 @media only screen and (min-width: 1440px) {
     #board-container {
-        height: 96vw;
         width: 96vw;
-        max-height: 96vmin;
         max-width: 96vmin;
+        height: 96vw;
+        max-height: 96vmin;
     }
 
     .space {
         width: 12vw;
+        max-width: 12vmin;
         height: 12vw;
         max-height: 12vmin;
-        max-width: 12vmin;
     }
 }
