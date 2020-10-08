@@ -5,24 +5,26 @@ body {
 #content-wrapper {
     display: inline-flex;
     flex-flow: row wrap;
-    justify-content: space-evenly;
-    width: 95vw;
-    min-width: 450px;
+    justify-content: center;
+    width: 98%;
+    height: 98%;
+    margin: auto;
 }
 
 #board-container {
     display: flex;
-    justify-content: space-evenly;
     flex-wrap: wrap;
-    min-width: 400px;
-    min-height: 400px;
-    height: 60vmin;
-    width: 60vmin;
+    width: 88vw;
+    height: 88vw;
+    max-height: 88vmin;
+    max-width: 88vmin;
 }
 
 .space {
-    width: 12.5%;
-    height: 12.5%;
+    width: 11vw;
+    height: 11vw;
+    max-height: 11vmin;
+    max-width: 11vmin;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,7 +32,7 @@ body {
 
 .space p {
     color: #121212;
-    font-size: 48px;
+    font-size: 5em;
 }
 
 .white-space {
@@ -55,8 +57,9 @@ body {
 }
 
 #moves-sidebar {
-    border: 3px groove #f8f8ff;
-    width: 100px;
+    border: 1px solid #f8f8ff;
+    width: 90px;
+    margin-left: 4px;
 }
 
 #moves-sidebar h3 {
@@ -85,7 +88,7 @@ body {
 #modal-textbox {
     background-color: #f8f8ff;
     border-radius: 2px;
-    margin: 150px auto;
+    margin: 20vh auto;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
     padding: 2%;
     line-height: 120%;
@@ -94,12 +97,11 @@ body {
 }
 
 #button-container {
-    min-width: 100px;
-    max-width: 95vw;
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
-    flex-flow: row wrap;
+    justify-content: space-around;
+    flex-flow: column wrap;
+    margin-left: 2px;
 }
 
 button {
@@ -109,11 +111,11 @@ button {
     font-size: 12px;
     text-align: center;
     cursor: pointer;
-    width: 75px;
-    min-width: 75px;
+    width: 110px;
+    min-width: 100px;
     height: 30px;
     min-height: 30px;
-    margin: 5px;
+    margin: 1px 2px;
 }
 
 .white-opening {
@@ -135,4 +137,100 @@ button {
 #reset-button {
     background-color: #d40000;
     color: #f8f8ff;
+}
+
+@media only screen and (min-width: 280px) and (max-width: 320px) {
+    .space p {
+        font-size: 2em;
+    }
+
+    #moves-sidebar {
+        margin-top: 4px;
+        margin-left: 2px;
+    }
+
+    #button-container {
+        flex-flow: column wrap;
+        margin-top: 2px;
+        margin-right: 2px;
+    }
+}
+
+@media only screen and (min-width: 321px) and (max-width: 414px) {
+    .space p {
+        font-size: 2.5em;
+    }
+
+    #moves-sidebar {
+        margin-top: 4px;
+        margin-left: 2px;
+    }
+
+    #button-container {
+        flex-flow: row wrap;
+        max-width: 200px;
+        margin-top: 2px;
+        margin-right: 2px;
+    }
+}
+
+@media only screen and (min-width: 415px) and (max-width: 425px) {
+    .space p {
+        font-size: 2.5em;
+    }
+
+    #moves-sidebar {
+        margin-top: 4px;
+        margin-left: 2px;
+    }
+
+    #button-container {
+        flex-flow: row wrap;
+        margin-top: 2px;
+        margin-right: 2px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    #board-container {
+        width: 72vw;
+        height: 72vw;
+        max-height: 72vmin;
+        max-width: 72vmin;
+    }
+
+    .space {
+        width: 9vw;
+        height: 9vw;
+        max-height: 9vmin;
+        max-width: 9vmin;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .space p {
+        font-size: 4em;
+    }
+
+    #button-container {
+        margin-top: 2px;
+        flex-flow: row wrap;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    #board-container {
+        height: 96vw;
+        width: 96vw;
+        max-height: 96vmin;
+        max-width: 96vmin;
+    }
+
+    .space {
+        width: 12vw;
+        height: 12vw;
+        max-height: 12vmin;
+        max-width: 12vmin;
+    }
 }

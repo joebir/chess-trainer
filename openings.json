@@ -1,11 +1,11 @@
 [{
         "name": "Ruy Lopez",
         "moves": [
-            "e2 e4",
-            "e7 e5",
-            "g1 f3",
-            "b8 c6",
-            "f1 b5"
+            [52, 36],
+            [12, 28],
+            [62, 45],
+            [1, 18],
+            [61, 25]
         ],
         "notation": [
             "e4",
@@ -19,11 +19,11 @@
     {
         "name": "Italian Game",
         "moves": [
-            "e2 e4",
-            "e7 e5",
-            "g1 f3",
-            "b8 c6",
-            "f1 c4"
+            [52, 36],
+            [12, 28],
+            [62, 45],
+            [1, 18],
+            [61, 34]
         ],
         "notation": [
             "e4",
@@ -35,11 +35,11 @@
         "isWhite": true
     },
     {
-        "name": "Sicilian: Closed",
+        "name": "Sicilian Defense: Closed",
         "moves": [
-            "e2 e4",
-            "c7 c5",
-            "b1 c3"
+            [52, 36],
+            [10, 26],
+            [57, 42]
         ],
         "notation": [
             "e4",
@@ -49,11 +49,11 @@
         "isWhite": true
     },
     {
-        "name": "Sicilian: Alapin",
+        "name": "Sicilian Defense: Alapin",
         "moves": [
-            "e2 e4",
-            "c7 c5",
-            "c2 c3"
+            [52, 36],
+            [10, 26],
+            [50, 42]
         ],
         "notation": [
             "e4",
@@ -65,9 +65,9 @@
     {
         "name": "King's Gambit",
         "moves": [
-            "e2 e4",
-            "e7 e5",
-            "f2 f4"
+            [52, 36],
+            [12, 28],
+            [53, 37]
         ],
         "notation": [
             "e4",
@@ -79,11 +79,11 @@
     {
         "name": "Scotch Game",
         "moves": [
-            "e2 e4",
-            "e7 e5",
-            "g1 f3",
-            "b8 c6",
-            "d2 d4"
+            [52, 36],
+            [12, 28],
+            [62, 45],
+            [1, 18],
+            [51, 35]
         ],
         "notation": [
             "e4",
@@ -97,9 +97,9 @@
     {
         "name": "Queen's Gambit",
         "moves": [
-            "d2 d4",
-            "d7 d5",
-            "c2 c4"
+            [51, 35],
+            [11, 27],
+            [50, 34]
         ],
         "notation": [
             "d4",
@@ -111,9 +111,9 @@
     {
         "name": "Trompowsky Attack",
         "moves": [
-            "d2 d4",
-            "g8 f6",
-            "c1 g5"
+            [51, 35],
+            [6, 21],
+            [58, 30]
         ],
         "notation": [
             "d4",
@@ -125,11 +125,11 @@
     {
         "name": "London System",
         "moves": [
-            "d2 d4",
-            "d7 d5",
-            "g1 f3",
-            "g8 f6",
-            "c1 f4"
+            [51, 35],
+            [11, 27],
+            [62, 45],
+            [6, 21],
+            [58, 37]
         ],
         "notation": [
             "d4",
@@ -143,11 +143,11 @@
     {
         "name": "Catalan Opening",
         "moves": [
-            "d2 d4",
-            "g8 f6",
-            "c2 c4",
-            "e7 e6",
-            "g2 g3"
+            [51, 35],
+            [6, 21],
+            [50, 34],
+            [12, 20],
+            [54, 46]
         ],
         "notation": [
             "d4",
@@ -159,14 +159,218 @@
         "isWhite": true
     },
     {
+        "name": "King's Indian Attack",
+        "moves": [
+            [62, 45],
+            [11, 27],
+            [54, 46]
+        ],
+        "notation": [
+            "♘f3",
+            "d5",
+            "g3"
+        ],
+        "isWhite": true
+    },
+    {
         "name": "Sicilian Defense",
         "moves": [
-            "e2 e4",
-            "c7 c5"
+            [11, 27],
+            [53, 37]
         ],
         "notation": [
             "e4",
             "c5"
+        ],
+        "isWhite": false
+    },
+    {
+        "name": "French Defense",
+        "moves": [
+            [11, 27],
+            [51, 43]
+        ],
+        "notation": [
+            "e4",
+            "e6"
+        ],
+        "isWhite": false
+    },
+    {
+        "name": "Caro-Kann Defense",
+        "moves": [
+            [11, 27],
+            [53, 45]
+        ],
+        "notation": [
+            "e4",
+            "c6"
+        ],
+        "isWhite": false
+    },
+    {
+        "name": "Scandanavian Defense",
+        "moves": [
+            [11, 27],
+            [52, 36]
+        ],
+        "notation": [
+            "e4",
+            "d5"
+        ],
+        "isWhite": false
+    },
+    {
+        "name": "Alekhine's Defense",
+        "moves": [
+            [11, 27],
+            [57, 42]
+        ],
+        "notation": [
+            "e4",
+            "♞f6"
+        ],
+        "isWhite": false
+    },
+    {
+        "name": "Slav Defense",
+        "moves": [
+            [12, 28],
+            [52, 36],
+            [13, 29],
+            [53, 45]
+        ],
+        "notation": [
+            "d4",
+            "d5",
+            "c4",
+            "c6"
+        ],
+        "isWhite": false
+    },
+    {
+        "name": "King's Indian Defense",
+        "moves": [
+            [12, 28],
+            [57, 42],
+            [13, 29],
+            [49, 41]
+        ],
+        "notation": [
+            "d4",
+            "♞f6",
+            "c4",
+            "g6"
+        ],
+        "isWhite": false
+    },
+    {
+        "name": "Nimzo-Indian Defense",
+        "moves": [
+            [12, 28],
+            [57, 42],
+            [13, 29],
+            [51, 43],
+            [6, 21],
+            [58, 30]
+        ],
+        "notation": [
+            "d4",
+            "♞f6",
+            "c4",
+            "e6",
+            "♘c3",
+            "♝b4"
+        ],
+        "isWhite": false
+    },
+    {
+        "name": "Queen's Indian Defense",
+        "moves": [
+            [12, 28],
+            [57, 42],
+            [13, 29],
+            [51, 43],
+            [1, 18],
+            [54, 46]
+        ],
+        "notation": [
+            "d4",
+            "♞f6",
+            "c4",
+            "e6",
+            "♘f3",
+            "b6"
+        ],
+        "isWhite": false
+    },
+    {
+        "name": "Bogo-Indian Defense",
+        "moves": [
+            [12, 28],
+            [57, 42],
+            [13, 29],
+            [51, 43],
+            [1, 18],
+            [58, 30]
+        ],
+        "notation": [
+            "d4",
+            "♞f6",
+            "c4",
+            "e6",
+            "♘f3",
+            "♝b4+"
+        ],
+        "isWhite": false
+    },
+    {
+        "name": "Grünfeld Defense",
+        "moves": [
+            [12, 28],
+            [57, 42],
+            [13, 29],
+            [49, 41],
+            [6, 21],
+            [52, 36]
+        ],
+        "notation": [
+            "d4",
+            "♞f6",
+            "c4",
+            "g6",
+            "♘c3",
+            "d5"
+        ],
+        "isWhite": false
+    }, {
+        "name": "Dutch Defense",
+        "moves": [
+            [12, 28],
+            [50, 34]
+        ],
+        "notation": [
+            "d4",
+            "f5"
+        ],
+        "isWhite": false
+    }, {
+        "name": "Benko Gambit",
+        "moves": [
+            [12, 28],
+            [57, 42],
+            [13, 29],
+            [53, 37],
+            [28, 36],
+            [54, 38]
+        ],
+        "notation": [
+            "d4",
+            "♞f6",
+            "c4",
+            "c5",
+            "d5",
+            "b5"
         ],
         "isWhite": false
     }

@@ -3,7 +3,8 @@ class Board {
         if (this.constructor === Board) {
             throw "Can't instantiate the abstract class Board";
         }
-        this.board = [{
+        this.board = {
+            rank8: {
                 a: "♜",
                 b: "♞",
                 c: "♝",
@@ -13,7 +14,7 @@ class Board {
                 g: "♞",
                 h: "♜"
             },
-            {
+            rank7: {
                 a: "♟",
                 b: "♟",
                 c: "♟",
@@ -23,7 +24,7 @@ class Board {
                 g: "♟",
                 h: "♟"
             },
-            {
+            rank6: {
                 a: " ",
                 b: " ",
                 c: " ",
@@ -33,7 +34,7 @@ class Board {
                 g: " ",
                 h: " "
             },
-            {
+            rank5: {
                 a: " ",
                 b: " ",
                 c: " ",
@@ -43,7 +44,7 @@ class Board {
                 g: " ",
                 h: " "
             },
-            {
+            rank4: {
                 a: " ",
                 b: " ",
                 c: " ",
@@ -53,7 +54,7 @@ class Board {
                 g: " ",
                 h: " "
             },
-            {
+            rank3: {
                 a: " ",
                 b: " ",
                 c: " ",
@@ -63,7 +64,7 @@ class Board {
                 g: " ",
                 h: " "
             },
-            {
+            rank2: {
                 a: "♙",
                 b: "♙",
                 c: "♙",
@@ -73,7 +74,7 @@ class Board {
                 g: "♙",
                 h: "♙"
             },
-            {
+            rank1: {
                 a: "♖",
                 b: "♘",
                 c: "♗",
@@ -83,7 +84,7 @@ class Board {
                 g: "♘",
                 h: "♖"
             }
-        ];
+        }
         this.move = (positions) => {
             const contents = this.space(positions[0]);
             this.space(positions[0], " ");
@@ -111,14 +112,15 @@ class WhiteBoard extends Board {
     constructor() {
         super();
         this.space = (divIndex, newValue = null) => {
-            const rankIndex = Math.floor(divIndex / 8);
+            const rankNum = Math.abs(Math.floor(divIndex / 8) - 8);
+            const rank = `rank${rankNum}`
             const fileArrIndex = divIndex % 8;
             const fileArr = ["a", "b", "c", "d", "e", "f", "g", "h"];
-            const fileIndex = fileArr[fileArrIndex]
+            const file = fileArr[fileArrIndex]
             if (newValue)
-                this.board[rankIndex][fileIndex] = newValue;
+                this.board[rank][file] = newValue;
             else
-                return this.board[rankIndex][fileIndex];
+                return this.board[rank][file];
         };
     }
 }
@@ -127,14 +129,15 @@ class BlackBoard extends Board {
     constructor() {
         super();
         this.space = (divIndex, newValue = null) => {
-            const rankIndex = Math.abs(Math.floor(divIndex / 8) - 7);
+            const rankNum = Math.floor(divIndex / 8) + 1;
+            const rank = `rank${rankNum}`
             const fileArrIndex = divIndex % 8;
             const fileArr = ["h", "g", "f", "e", "d", "c", "b", "a"];
-            const fileIndex = fileArr[fileArrIndex]
+            const file = fileArr[fileArrIndex]
             if (newValue)
-                this.board[rankIndex][fileIndex] = newValue;
+                this.board[rank][file] = newValue;
             else
-                return this.board[rankIndex][fileIndex];
+                return this.board[rank][file];
         };
     }
 }
@@ -182,40 +185,41 @@ const highlightToMove = ($endDiv, movesArr, notationArr) => {
     highlightSpace($endDiv);
     $endDiv.one("click", () => {
         boardMemory.move(movesArr[0]);
-        const $notationLi = $("<li>").text(notationArr[0]);
-        $("ol").append($notationLi);
+        updateNotation(notationArr[0]);
         movesArr.shift();
         notationArr.shift();
         if (movesArr.length)
-            opponentMove(movesArr, notationArr);
+            setTimeout(() => opponentMove(movesArr, notationArr), 1000);
     })
 }
 
 const opponentMove = (movesArr, notationArr) => {
     boardMemory.move(movesArr[0]);
-    const $notationLi = $($("ol").children().last());
-    let notationText = `${$notationLi.text()} ${notationArr[0]}`;
-    $notationLi.text(notationText);
+    updateNotation(notationArr[0]);
     movesArr.shift();
     notationArr.shift();
     highlightToSelect(movesArr, notationArr);
 }
 
+const updateNotation = (notation) => {
+    if ($("ol").children().length) {
+        const $lastNotationLine = $($("ol").children().last());
+        const currentText = $lastNotationLine.text();
+        if (currentText.includes(" "))
+            addNotationLine(notation);
+        else
+            $lastNotationLine.text(`${currentText} ${notation}`);
+    } else
+        addNotationLine(notation);
+}
+
+const addNotationLine = (notation) => {
+    const $notationLi = $("<li>").text(notation);
+    $("ol").append($notationLi);
+}
+
 const arrangeOpening = (opening) => {
-    const movesArr = [];
-    opening.moves.map(move => move).forEach(move => {
-        const spaces = move.split(" ");
-        const divIndices = [];
-        spaces.forEach(spaceNotation => {
-            const noPieceSpaceNotation = spaceNotation.substring(spaceNotation.length - 2);
-            const splitNotation = noPieceSpaceNotation.split("");
-            const rankIndex = Math.abs(parseInt(splitNotation[1]) - 8)
-            const fileArr = ["a", "b", "c", "d", "e", "f", "g", "h"];
-            const fileIndex = fileArr.indexOf(splitNotation[0]);
-            divIndices.push(rankIndex * 8 + fileIndex);
-        });
-        movesArr.push(divIndices);
-    });
+    const movesArr = opening.moves.map(move => move);
     const notationArr = opening.notation.map(notation => notation);
     if (opening.isWhite) {
         boardMemory = new WhiteBoard();
@@ -224,6 +228,7 @@ const arrangeOpening = (opening) => {
     } else {
         boardMemory = new BlackBoard();
         boardMemory.displayBoard();
+        opponentMove(movesArr, notationArr);
     }
 }
 
