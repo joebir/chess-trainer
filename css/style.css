@@ -55,7 +55,7 @@ body {
 }
 
 #moves-sidebar {
-    border: 3px groove #f8f8f8;
+    border: 3px groove #f8f8ff;
     width: 100px;
 }
 
@@ -114,6 +114,17 @@ button {
     height: 30px;
     min-height: 30px;
     margin: 5px;
+}
+
+.white-opening {
+    background-color: #f8f8ff;
+    color: #121212;
+}
+
+.black-opening {
+    background-color: #121212;
+    color: #f8f8ff;
+    border: 1px solid #f8f8ff;
 }
 
 .close-modal {

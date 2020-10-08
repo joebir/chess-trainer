@@ -1,5 +1,8 @@
 class Board {
     constructor() {
+        if (this.constructor === Board) {
+            throw "Can't instantiate the abstract class Board";
+        }
         this.board = [{
                 a: "♜",
                 b: "♞",
@@ -98,6 +101,15 @@ class Board {
             this.displayBoard();
         };
         this.displayBoard = () => {
+            throw "Abstract method call!";
+        };
+    }
+}
+
+class WhiteBoard extends Board {
+    constructor() {
+        super();
+        this.displayBoard = () => {
             $(".space").children().remove();
             for (let rankIndex = 0; rankIndex < 8; rankIndex++) {
                 for (let fileIndex = 0; fileIndex < 8; fileIndex++) {
@@ -111,7 +123,24 @@ class Board {
     }
 }
 
-let boardMemory = new Board;
+class BlackBoard extends Board {
+    constructor() {
+        super();
+        this.displayBoard = () => {
+            $(".space").children().remove();
+            for (let rankIndex = 7; rankIndex >= 0; rankIndex--) {
+                for (let fileIndex = 7; fileIndex >= 0; fileIndex--) {
+                    const divIndex = (rankIndex * 8) + fileIndex;
+                    const $contentsP = $("<p>").text(this.space(divIndex));
+                    const $targetDiv = $($("#board-container").children().get(divIndex));
+                    $targetDiv.append($contentsP);
+                }
+            }
+        };
+    }
+}
+
+let boardMemory = null;
 
 const generateBoard = () => {
     let spaceIsWhite = true;
@@ -126,7 +155,6 @@ const generateBoard = () => {
         }
         $("#board-container").append($spaceDiv);
     }
-    boardMemory.displayBoard();
 }
 
 const highlightSpace = ($spaceDiv) => {
@@ -190,14 +218,19 @@ const arrangeOpening = (opening) => {
         movesArr.push(divIndices);
     });
     const notationArr = opening.notation.map(notation => notation);
-    highlightToSelect(movesArr, notationArr);
+    if (opening.isWhite) {
+        boardMemory = new WhiteBoard();
+        boardMemory.displayBoard();
+        highlightToSelect(movesArr, notationArr);
+    } else {
+        // TODO: implement black opening arrangement
+    }
 }
 
 const resetBoard = () => {
     $("#board-container").empty();
     $("ol").empty();
     $(".space").off("click");
-    boardMemory = new Board;
     generateBoard();
 }
 
@@ -212,6 +245,10 @@ $(() => {
         openings.forEach(opening => {
             const $openingButton = $("<button>").text(opening.name);
             $openingButton.addClass("opening-button");
+            if (opening.isWhite)
+                $openingButton.addClass("white-opening");
+            else
+                $openingButton.addClass("black-opening");
             $("#button-container").append($openingButton);
         });
 

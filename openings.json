@@ -13,7 +13,8 @@
             "♘f3",
             "♞c6",
             "♗b5"
-        ]
+        ],
+        "isWhite": true
     },
     {
         "name": "Italian Game",
@@ -30,7 +31,8 @@
             "♘f3",
             "♞c6",
             "♗c4"
-        ]
+        ],
+        "isWhite": true
     },
     {
         "name": "Sicilian: Closed",
@@ -43,7 +45,8 @@
             "e4",
             "c5",
             "♘c3"
-        ]
+        ],
+        "isWhite": true
     },
     {
         "name": "Sicilian: Alapin",
@@ -56,7 +59,8 @@
             "e4",
             "c5",
             "c3"
-        ]
+        ],
+        "isWhite": true
     },
     {
         "name": "King's Gambit",
@@ -69,7 +73,8 @@
             "e4",
             "e5",
             "f4"
-        ]
+        ],
+        "isWhite": true
     },
     {
         "name": "Scotch Game",
@@ -86,7 +91,8 @@
             "♘f3",
             "♞c6",
             "d4"
-        ]
+        ],
+        "isWhite": true
     },
     {
         "name": "Queen's Gambit",
@@ -99,7 +105,8 @@
             "d4",
             "d5",
             "c4"
-        ]
+        ],
+        "isWhite": true
     },
     {
         "name": "Trompowsky Attack",
@@ -112,7 +119,8 @@
             "d4",
             "♞f6",
             "♗g5"
-        ]
+        ],
+        "isWhite": true
     },
     {
         "name": "London System",
@@ -129,7 +137,8 @@
             "♘f3",
             "♞f6",
             "♗f4"
-        ]
+        ],
+        "isWhite": true
     },
     {
         "name": "Catalan Opening",
@@ -146,6 +155,19 @@
             "c4",
             "e6",
             "g3"
-        ]
+        ],
+        "isWhite": true
+    },
+    {
+        "name": "Sicilian Defense",
+        "moves": [
+            "e2 e4",
+            "c7 c5"
+        ],
+        "notation": [
+            "e4",
+            "c5"
+        ],
+        "isWhite": false
     }
 ]
