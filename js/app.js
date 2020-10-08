@@ -84,31 +84,12 @@ class Board {
                 h: "♖"
             }
         ];
-        this.space = (divIndex, newValue = null) => {
-            const rankIndex = Math.floor(divIndex / 8);
-            const fileArrIndex = divIndex % 8;
-            const fileArr = ["a", "b", "c", "d", "e", "f", "g", "h"];
-            const fileIndex = fileArr[fileArrIndex]
-            if (newValue)
-                this.board[rankIndex][fileIndex] = newValue;
-            else
-                return this.board[rankIndex][fileIndex];
-        };
         this.move = (positions) => {
             const contents = this.space(positions[0]);
             this.space(positions[0], " ");
             this.space(positions[1], contents);
             this.displayBoard();
         };
-        this.displayBoard = () => {
-            throw "Abstract method call!";
-        };
-    }
-}
-
-class WhiteBoard extends Board {
-    constructor() {
-        super();
         this.displayBoard = () => {
             $(".space").children().remove();
             for (let rankIndex = 0; rankIndex < 8; rankIndex++) {
@@ -120,22 +101,40 @@ class WhiteBoard extends Board {
                 }
             }
         };
+        this.space = (divIndex, newValue = null) => {
+            throw "Abstract method call!";
+        }
+    }
+}
+
+class WhiteBoard extends Board {
+    constructor() {
+        super();
+        this.space = (divIndex, newValue = null) => {
+            const rankIndex = Math.floor(divIndex / 8);
+            const fileArrIndex = divIndex % 8;
+            const fileArr = ["a", "b", "c", "d", "e", "f", "g", "h"];
+            const fileIndex = fileArr[fileArrIndex]
+            if (newValue)
+                this.board[rankIndex][fileIndex] = newValue;
+            else
+                return this.board[rankIndex][fileIndex];
+        };
     }
 }
 
 class BlackBoard extends Board {
     constructor() {
         super();
-        this.displayBoard = () => {
-            $(".space").children().remove();
-            for (let rankIndex = 7; rankIndex >= 0; rankIndex--) {
-                for (let fileIndex = 7; fileIndex >= 0; fileIndex--) {
-                    const divIndex = (rankIndex * 8) + fileIndex;
-                    const $contentsP = $("<p>").text(this.space(divIndex));
-                    const $targetDiv = $($("#board-container").children().get(divIndex));
-                    $targetDiv.append($contentsP);
-                }
-            }
+        this.space = (divIndex, newValue = null) => {
+            const rankIndex = Math.abs(Math.floor(divIndex / 8) - 7);
+            const fileArrIndex = divIndex % 8;
+            const fileArr = ["h", "g", "f", "e", "d", "c", "b", "a"];
+            const fileIndex = fileArr[fileArrIndex]
+            if (newValue)
+                this.board[rankIndex][fileIndex] = newValue;
+            else
+                return this.board[rankIndex][fileIndex];
         };
     }
 }
@@ -223,7 +222,8 @@ const arrangeOpening = (opening) => {
         boardMemory.displayBoard();
         highlightToSelect(movesArr, notationArr);
     } else {
-        // TODO: implement black opening arrangement
+        boardMemory = new BlackBoard();
+        boardMemory.displayBoard();
     }
 }
 
