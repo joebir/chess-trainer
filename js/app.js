@@ -189,16 +189,20 @@ const highlightToMove = ($endDiv, movesArr, notationArr) => {
         movesArr.shift();
         notationArr.shift();
         if (movesArr.length)
-            setTimeout(() => opponentMove(movesArr, notationArr), 1000);
+            opponentMove(movesArr, notationArr);
+        else
+            finishOpening();
     })
 }
 
 const opponentMove = (movesArr, notationArr) => {
-    boardMemory.move(movesArr[0]);
-    updateNotation(notationArr[0]);
-    movesArr.shift();
-    notationArr.shift();
-    highlightToSelect(movesArr, notationArr);
+    setTimeout(() => {
+        boardMemory.move(movesArr[0]);
+        updateNotation(notationArr[0]);
+        movesArr.shift();
+        notationArr.shift();
+        highlightToSelect(movesArr, notationArr);
+    }, 1000)
 }
 
 const updateNotation = (notation) => {
@@ -232,9 +236,15 @@ const arrangeOpening = (opening) => {
     }
 }
 
+const finishOpening = () => {
+    const $endMessage = $("<h3>").text("End of Opening");
+    $("#moves-sidebar").append($endMessage)
+}
+
 const resetBoard = () => {
     $("#board-container").empty();
     $("ol").empty();
+    $("#moves-sidebar").children().last().remove();
     $(".space").off("click");
     generateBoard();
 }
