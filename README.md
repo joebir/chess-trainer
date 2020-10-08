@@ -1,8 +1,11 @@
 # Chess Trainer
 ## Project Overview
 The first JavaScript project I worked on during my software engineering immersive at General Assembly. I started with ambitious eyes: having already done an SEI, I figured now would be a good time to really put it to the test by building a game of chess that recorded each move.
+
 However, after a proposal meeting with the instructors, I was advised to scale it back; I was still enamored of the idea of building something having to do with chess. I tend to come and go from the game when I play; the basics are all stuck in but I have a hard time remembering some of the more complex theory. With that in mind, I scaled my proposal back: rather than a full game, I decided to create something that gives the user the chance to see hoow openings are played out.
+
 My minimum viable product was to allow for typical openings and answers for white; functionally that meant the whole application was structured in that MVP around the assumption that the player is going first. After reaching the end that MVP, I decided I had two options: I could implement openings for black and clean up my code for the future, or I could try to learn more about DOM manipulation animations. In the end I decided to go with implementing openings for black and refactoring.
+
 Once I was satisfied with my refactor I set about hand-crafting responsive views for various screen sizes; I did most of this work by hand, checking my work in a window I continued to hard refresh with every change I wanted to observe. I'm more or less satisfied with most of the views that I created; there's some scaling issues with the moves sidebar and the board size on the 1024px size and I decided that scaling it for a 4K window size was needless but the rest are functional and don't have any glaring issues I spotted.
 ## Wireframe
 ![Proposal wireframe](/wireframes/wireframe-matchstart.jpg)
